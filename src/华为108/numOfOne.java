@@ -8,9 +8,9 @@ import java.util.Scanner;
 /**
  * Created by fantuan on 2019/8/20.
  */
-public class int_1 {
+public class numOfOne {
     /*
-    *题目描述
+    * 题目描述
     * 输入一个int型的正整数，计算出该int型数据在内存中存储时1的个数。
     * 输入描述:
     * 输入一个整数（int类型） 有负数
@@ -19,13 +19,14 @@ public class int_1 {
     *
     * */
     public static void main(String[] args) {
+
 //        int n = 5;
+//        System.out.println(intToBin_3(n));
+
+
         Scanner sc=new Scanner(System.in);
         while (sc.hasNext()) {
             int n = sc.nextInt();
-//        System.out.println("十进制" + n + "转为二进制" + Integer.toString(n, 2));
-//        System.out.println(intToBin_1(n));
-//        System.out.println(intToBin_2(n));
             System.out.println(intToBin_3(n));
         }
     }
