@@ -44,7 +44,8 @@ public class messageForward {
 
         Scanner sc = new Scanner(System.in);
         String openName = sc.nextLine();
-        int n = sc.nextInt();
+        String number = sc.nextLine();
+        int n = Integer.parseInt(number);
         String[] s = new String[n];
         for (int i = 0; i < n; i++) {
             s[i] = sc.nextLine();
