@@ -9,8 +9,7 @@ public class primeNum_x {
     /**
      * 找出[LOW,HIGH)的所有素数,
      * 输出这些数十位数之和与个位数之和的较小值
-     * 转换规则如下：
-     * 报文中如果出现0x0A，转义成为2个字节0x12 0x34，如果出现0x0B，转义成为2个字节0xAB 0xCD。
+     *
      */
     public static void main(String[] args) {
 //        int low = 151;
