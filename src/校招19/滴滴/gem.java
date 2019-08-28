@@ -1,5 +1,6 @@
 package 校招19.滴滴;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -35,32 +36,48 @@ public class gem {
         }
 
 //        System.out.println(sa + "||" + sb);
-
         int gemNum = preCount(sa, sb);
 //        找到
-        for (int result=gemNum;result>0;result--){
-            if (cost * gemNum + costCurr < total) {
-                return gemNum;
+        for (int resultNum=gemNum;resultNum>0;resultNum--){
+            if (cost * resultNum + costCurr < total) {
+                return resultNum;
             }else {
+                sb.charAt(resultNum);
                 // TODO: 2019/8/28 cost的回溯判断 
                 costCurr+=0;
             }
-            
         }
-        
-
         return gemNum;
     }
 
     private static int preCount(String sa, String sb) {
+        ArrayList<Integer> arrayList=new ArrayList<>();
         for (int i = 0; i < sa.length(); i = i + 2) {
-//            System.out.println(sa.charAt(i));
             if (sb.contains(sa.charAt(i) + "")) {
-                // TODO: 2019/8/28 如果存在就找到它出现的位置,不存在就不存.用arraylist.
+                //如果存在就找到它出现的位置,不存在就不存.
+                arrayList.add(sb.indexOf(sa.charAt(i) + ""));
             }
-            // TODO: 2019/8/28 写一个返回最长增序子序列长度的函数,返回值即为宝石数 
         }
-        return 3;
+//        System.out.println(arrayList);
+        //写一个返回最长增序子序列长度的函数,返回值即为宝石数
+        int n=arrayList.size();
+        int[] number = new int[n];
+        int[] increSeq = new int[n];
+        for (int i = 0; i < n; i++) {
+            number[i]=arrayList.get(i);
+            increSeq[i] = 1;
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(number[i]>number[j]&&increSeq[j]+1>increSeq[i])
+                    increSeq[i]=increSeq[j]+1;
+            }
+        }
+        int max = 0;
+        for (int i = 0; i < n; i++) {
+            max = Math.max(increSeq[i], max);
+        }
+        return max;
     }
 
 }
