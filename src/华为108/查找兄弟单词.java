@@ -9,9 +9,12 @@ public class 查找兄弟单词 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner( System.in );
-        String s = sc.nextLine();
+        while (sc.hasNext()){
+            String s = sc.nextLine();
+            serachBro( s );
+        }
         sc.close();
-        serachBro( s );
+
     }
 
     private static void serachBro(String s) {
@@ -28,8 +31,6 @@ public class 查找兄弟单词 {
         Collections.sort(  broWordS);
         System.out.println(broWordS.size());
         System.out.println(broWordS.get( k-1 ));
-
-
     }
 
     private static Boolean isBor(String s1, String s2) {
