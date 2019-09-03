@@ -23,9 +23,11 @@ public class 字符串排序 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner( System.in );
-        String s = sc.nextLine();
+        while (sc.hasNext()) {
+            String s = sc.nextLine();
+            System.out.println( stringSort( s ) );
+        }
         sc.close();
-        System.out.println( stringSort( s ) );
     }
 
     private static String stringSort(String s) {
