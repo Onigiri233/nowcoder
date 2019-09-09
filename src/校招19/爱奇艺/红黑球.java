@@ -18,6 +18,7 @@ public class 红黑球 {
      输出
      请你输出A获胜的概率，结果保留5位小数。（四舍五入）
      */
+    static HashSet<String> set=new HashSet();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -27,7 +28,6 @@ public class 红黑球 {
             int m=Integer.parseInt(nInt.split(" ")[1]);
             
             System.out.println(getNum(n,m));
-
         }
         sc.close();
     }
@@ -35,41 +35,20 @@ public class 红黑球 {
     private static double getNum(int n, int m) {
 //
 //        红球1 篮球0
-        List<int[]> list=new ArrayList<>();
-        HashSet set=new HashSet();
         int[] seq=new int[n+m];
-        int[] hongqiu=new int[n];
         Arrays.fill(seq,0);
         for (int i = 0; i <n ; i++) {
             seq[i]=1;
         }
-        for (int i = 0; i <n+m ; i++) {
-            for (int j = 0; j <n+m ; j++) {
-                int temp=seq[i];
-                seq[i]=seq[j];
-                seq[j]=temp;
-                if (check(seq)){
-                    boolean ishas=false;
-                    if (!list.isEmpty()){
-                        for (int k = 0; k < list.size(); k++) {
-                            int[] str1=list.get(k);
-                            if (Arrays.equals( str1, seq )){
-                                ishas=true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!ishas){
-                        list.add(seq);
-                    }
-                }
+//        全排列后判断1的位置
+        arrange(seq, 0, seq.length - 1);
+        System.out.println(set);
 
-            }
-        }
-        double shengli=list.size();
-        double zongshu=cal(n+m)/cal(n)*cal(m);
+        double shengli=set.size();
+        double zongshu=cal(n+m)/(cal(n)*cal(m));
+        System.out.println(shengli+"|"+zongshu);
 
-        return shengli/zongshu;
+        return (double) Math.round(shengli/zongshu * 100000) / 100000;
     }
 
     private static boolean check(int[] seq) {
@@ -102,5 +81,36 @@ public class 红黑球 {
         }else {
             return cal(n-1)*n;
         }
+    }
+    private static void arrange(int a[], int start, int end) {
+        if (start == end) {
+//            取完了,这里写要做的操作OR判断
+            if (check(a)){
+                set.add(Arrays.toString(a));
+            }
+            return;
+        }
+        for (int i = start; i <= end; i++) {
+            if (isSwap(a, i, start)){
+                swap(a, i, start);
+                arrange(a, start + 1, end);
+                swap(a, i, start);
+            }
+        }
+    }
+//   剪枝,如果交换是两个重复元素就跳过
+    private static boolean isSwap(int[] arr, int begin, int end) {
+        for (int i=begin;i<end;i++){
+            if (arr[i]==arr[end]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void swap(int arr[], int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
