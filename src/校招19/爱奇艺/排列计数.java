@@ -1,5 +1,6 @@
 package 校招19.爱奇艺;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -29,7 +30,6 @@ public class 排列计数 {
             for (int i = 0; i < n - 1; i++) {
                 numS[i] = sc.nextInt();
             }
-
             System.out.println(getNum(n, numS));
 
         }
@@ -37,26 +37,24 @@ public class 排列计数 {
     }
 
     private static int getNum(int n, int[] numS) {
-        int nixu = 0;
-        for (int i = 0; i < numS.length; i++) {
-            if (numS[i] == 1) {
-                nixu++;
+        double mod = 1e9 + 7;
+        int[][] dp = new int[n][n];
+        for (int i = 0; i < n; ++i) {
+            dp[0][i] = 1;
+        }
+        for (int i = 1; i < n; ++i) {
+            for (int j = 0; j <= i; ++j) {
+                if (numS[i - 1] == 1) {
+                    dp[i][j] = (j == 0 ? 0 : dp[i][j - 1] - dp[i - 1][j - 1]) + dp[i - 1][i - 1];
+                } else {
+                    dp[i][j] = j == 0 ? 0 : dp[i][j - 1] + dp[i - 1][j - 1];
+                }
+                if (dp[i][j] < 0) {
+                    dp[i][j] += mod;
+                }
+                dp[i][j] %= mod;
             }
         }
-        if (nixu == 0) {
-            return 1;
-        }
-        if (nixu==n){
-            return 1;
-
-        }
-        if (nixu % 2 == 0) {
-//            偶排序
-            return n - nixu + 1;
-
-        } else {
-//            奇排序
-            return n - nixu;
-        }
+        return (int) (dp[n-1][n-1] % mod);
     }
 }
