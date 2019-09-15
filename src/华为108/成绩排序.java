@@ -21,16 +21,14 @@ public class 成绩排序 {
             int n = Integer.parseInt(nInt);
             String modelInt = sc.nextLine();
             int model = Integer.parseInt(modelInt);
-            Student[] students=new Student[n];
+            Student[] students = new Student[n];
             String[] name = new String[n];
             int[] nNums = new int[n];
             for (int i = 0; i < n; i++) {
                 String s = sc.nextLine();
                 name[i] = s.split(" ")[0];
                 nNums[i] = Integer.parseInt(s.split(" ")[1]);
-                students[i]=new Student(s.split(" ")[0],Integer.parseInt(s.split(" ")[1]));
-
-
+                students[i] = new Student(s.split(" ")[0], Integer.parseInt(s.split(" ")[1]));
             }
             paixu(model, students);
         }
@@ -38,23 +36,23 @@ public class 成绩排序 {
     }
 
     private static void paixu(int model, Student[] students) {
-        Student.flag=model;
+        Student.flag = model;
+//        底层是归并,仍然具有稳定性
         Arrays.sort(students);
-        for(Student s :students){
+        for (Student s : students) {
             System.out.println(s);
         }
     }
-
-
 }
-class Student implements Comparable<Student>{
+
+class Student implements Comparable<Student> {
     String name;
     int score;
     public static int flag;
 
-    public Student( String name,int score){
-        this.name=name;
-        this.score=score;
+    public Student(String name, int score) {
+        this.name = name;
+        this.score = score;
     }
 
     public int compareTo(Student other) {

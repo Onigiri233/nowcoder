@@ -58,7 +58,7 @@ public class gem {
                 return 0;
             }
             else{
-                // TODO: 2019/8/28 cost的回溯判断
+                // cost的回溯判断
                 costCurr += Integer.parseInt(sa.charAt(resultNum * 2) + "");
                 int starA, starB, endA, endB;
                 starA = arrayListA.get(resultNum - 2);

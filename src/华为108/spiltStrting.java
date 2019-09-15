@@ -16,19 +16,13 @@ public class spiltStrting {
      * 输出到长度为8的新字符串数组
      */
     public static void main(String[] args) {
-        // TODO: 2019/8/20  本地测试用例
-        String s1 = "abc";
-        String s2 = "123456789";
-        printString8(string8split(s1), string8split(s2));
 
-
-// TODO: 2019/8/20 网页端测试接口
-//        Scanner sc = new Scanner(System.in);
-//        while (sc.hasNext()) {
-//            String s1 = sc.nextLine();
-//            String s2 = sc.nextLine();
-//            printString8(string8split(s1), string8split(s2));
-//        }
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNext()) {
+            String s1 = sc.nextLine();
+            String s2 = sc.nextLine();
+            printString8(string8split(s1), string8split(s2));
+        }
     }
 
 

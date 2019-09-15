@@ -1,31 +1,77 @@
 package 随手撸的代码;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 public class Main {
-//    经典硬币问题
-//    有1分，2分，5分，10分四种硬币，每种硬币数量无限，给定n分钱(n<10000)，有多少中组合可以组成n分钱？
-
+    static HashSet<String> set=new HashSet();
     public static void main(String[] args) {
-        int n=13;
-        int coins[]=new int[]{1,2,5,10};
-        printCombination(n,coins);
+        int n=4;
+        int[] seq=new int[n];
+        for (int i = 0; i <n ; i++) {
+            seq[i]=i+1;
+        }
+        System.out.println(Arrays.toString(seq));
+//        全排列后判断1的位置
+        arrange(seq, 0, seq.length - 1);
+        System.out.println(set);
+        System.out.println(set.size());
+    }
+    private static boolean check(int[] seq) {
+        int A_1=-1;
+        int B_1=-1;
+        for (int i = 0; i < seq.length; i++) {
+            if (seq[i]==1){
+                if (i%3==0){
+                    if (A_1==-1){
+                        A_1=i;
+                    }
+                }else if (i%3==1){
+                    if (B_1==-1){
+                        B_1=i;
+                    }
+                }
+            }
+        }
+        if (A_1==-1){
+            return false;
+        }else
+        if (A_1<B_1 ||B_1==-1){
+            return true;
+        }
+        return false;
     }
 
-
-
-    private static int combination(int n,int[] coins,int cur) {
-        if (cur == 0) {
-            return 1;
-        }
-        int ans = 0;
-        for (int i = 0; i * coins[cur] <= n; i++) {
-            ans += combination(n - i * coins[cur], coins, cur - 1);
-        }
-        return ans;
-    }
-    private static void printCombination(int n,int[] coins) {
-        if (n<=0){
+    private static void arrange(int a[], int start, int end) {
+        if (start == end) {
+//            取完了,这里写要做的操作OR判断
+            if (check(a)){
+            }
+            set.add(Arrays.toString(a));
             return;
         }
-        System.out.println(combination(n,coins,coins.length-1));
+        for (int i = start; i <= end; i++) {
+            if (isSwap(a, i, start)){
+                swap(a, i, start);
+                arrange(a, start + 1, end);
+                swap(a, i, start);
+            }
+        }
     }
+    //   剪枝,如果交换是两个重复元素就跳过
+    private static boolean isSwap(int[] arr, int begin, int end) {
+        for (int i=begin;i<end;i++){
+            if (arr[i]==arr[end]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void swap(int arr[], int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
 }

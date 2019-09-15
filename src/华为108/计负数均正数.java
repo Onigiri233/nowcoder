@@ -43,7 +43,7 @@ public class 计负数均正数 {
                 zero++;
             }
         }
-        pingjun=pingjun/nNums.length-fushu-zero;
+        pingjun=pingjun/(nNums.length-fushu-zero);
 
         System.out.println(fushu+" "+String.format("%.1f",pingjun));
     }
